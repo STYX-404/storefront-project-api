@@ -86,12 +86,12 @@ SALT_ROUNDS=SALT_ROUNDS
 - `localhost:3000/users`  return all users from the database            **[GET]**
 - `localhost:3000/users/:id`  return one user from database by id       **[GET]**
 - `localhost:3000/users`  insert new user in the database               **[POST]**
-### 🚧The Products Endpoint
+### 🚧The Products Endpoints
 
 - `localhost:3000/products`  return all products from the database      **[GET]**
 - `localhost:3000/products/:id`  return one product from database by id **[GET]**
 - `localhost:3000/products`  insert new product in the database         **[POST]**
-### 🚧The Orders Endpoint
+### 🚧The Orders Endpoints
 - `localhost:3000/orders`  return all orders from the database          **[GET]**
 - `localhost:3000/orders`  insert new order in the database             **[POST]**
 - `localhost:3000/orders/:id`  return one order from the database by id **[GET]**
