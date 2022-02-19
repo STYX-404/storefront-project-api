@@ -2,8 +2,6 @@ import express, { Request, Response } from 'express';
 import user_routes from './handlers/user_handler';
 import product_routes from './handlers/product_handler';
 import orders_routes from './handlers/order_handler';
-// to pass the async errors to the error handler automatically
-// without the need to use next() with every route
 import 'express-async-errors';
 
 const app = express();

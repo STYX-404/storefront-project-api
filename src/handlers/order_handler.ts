@@ -7,22 +7,16 @@ dotenv.config();
 
 const store = new OrderStore();
 
-// INDEX function() -> show all users in database
-
 const index = async (req: Request, res: Response) => {
   const orders = await store.index();
   res.json(orders);
 };
-
-// SHOW function() -> show one users from database by his id
 
 const show = async (req: Request, res: Response) => {
   const orderId = req.params.id;
   const order = await store.show(orderId);
   res.json(order);
 };
-
-// CREATE function() ->create a new user in database
 
 const create = async (req: Request, res: Response) => {
   const order: Order = {

@@ -5,38 +5,34 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show (args: product id)
-- Create (args: Product)[token required]
-<!-- - [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category) -->
+- Index                                     [/products]         [GET]
+- Show (args: product id)                   [/products/:id]     [GET]
+- Create (args: Product)                    [/products]         [POST]
 
 #### Users
-- Index [token required]     [DONE]
-- Show (args: id)[token required]   [DONE]
-- Create (args: User)[token required]
+- Index [token required]                [/users]        [GET]
+- Show (args: id)[token required]       [/users/:id]    [GET]
+- Create (args: User)[token required]   [/users]        [POST]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-<!-- - [OPTIONAL] Completed Orders by user (args: user id)[token required] -->
+- Current Order by user (args: user id)[token required] [/orders]   [GET]
 
 ## Data Shapes
 #### Product
--  id   [DONE]
-- name  [DONE]
-- price [DONE]
-<!-- - [OPTIONAL] category -->
+-  id   [SERIAL PEIMARY KEY]
+- name  [VARCHAR(100)]
+- price [FLOAT]
 
 #### User
-- id    [DONE]
-- firstName [DONE]
-- lastName  [DONE]
-- password  [DONE]
+-  id   [SERIAL PEIMARY KEY]
+- firstName [VARCHAR(50)]
+- lastName  [VARCHAR(50)]
+- password  [VARCHAR(300)]
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id                                        [SERIAL PEIMARY KEY]
+- id of each product in the order           [INTEGER FORIGN KEY REFERENCES products(id)]
+- quantity of each product in the order     [INTEGER]
+- user_id                                   [INTEGER FORIGN KEY REFERENCES users(id)]
+- status of order (active or complete)      [VARCHAR(20)]
 

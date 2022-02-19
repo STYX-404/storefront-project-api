@@ -3,7 +3,10 @@ import jwt, { Secret } from 'jsonwebtoken';
 
 const verifyAuthToken = (req: Request, res: Response, next: any) => {
   try {
-    jwt.verify(req.body.token, process.env.JWT_KEY as Secret);
+    const authorizationHeader = req.headers.authorization as string;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.JWT_KEY as Secret);
+
     next();
   } catch (error) {
     res.status(401);
