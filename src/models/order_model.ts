@@ -1,18 +1,18 @@
-import client from "../database";
-import dotenv from "dotenv";
+import client from '../database';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 export type Order = {
   status: string;
-  userId: number;
+  user_id: number;
 };
 
 export class OrderStore {
   async index() {
     try {
       const conn = await client.connect();
-      const sql = "SELECT * FROM orders;";
+      const sql = 'SELECT * FROM orders;';
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -24,7 +24,7 @@ export class OrderStore {
   async show(orederId: string) {
     try {
       const conn = await client.connect();
-      const sql = "SELECT * FROM orders WHERE id =$1;";
+      const sql = 'SELECT * FROM orders WHERE id =$1;';
       const result = await conn.query(sql, [orederId]);
       conn.release();
       return result.rows[0];
@@ -36,8 +36,8 @@ export class OrderStore {
     try {
       const conn = await client.connect();
       const sql =
-        "INSERT INTO orders (status, user_id) VALUES($1, $2) RETURNING *";
-      const result = await conn.query(sql, [order.status, order.userId]);
+        'INSERT INTO orders (status, user_id) VALUES($1, $2) RETURNING *';
+      const result = await conn.query(sql, [order.status, order.user_id]);
       conn.release();
       return result.rows[0];
     } catch (error) {
@@ -45,11 +45,11 @@ export class OrderStore {
     }
   }
 
-  async addProduct(orderId: string, productId: string, quantity: number) {
+  async addProduct(orderId: string, productId: number, quantity: number) {
     try {
       const conn = await client.connect();
       const sql =
-        "INSERT INTO orders_products (order_id, product_id, quantity) VALUES($1, $2, $3) RETURNING *";
+    'INSERT INTO orders_products (order_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *';
       const result = await conn.query(sql, [orderId, productId, quantity]);
       conn.release();
       return result.rows[0];

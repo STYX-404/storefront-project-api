@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import jwt, { Secret } from "jsonwebtoken";
+import { Request, Response } from 'express';
+import jwt, { Secret } from 'jsonwebtoken';
 
 const verifyAuthToken = (req: Request, res: Response, next: any) => {
   try {
@@ -7,7 +7,7 @@ const verifyAuthToken = (req: Request, res: Response, next: any) => {
     next();
   } catch (error) {
     res.status(401);
-    res.send("Access denied, invalid token!");
+    res.send('Access denied, invalid token!');
   }
 };
 

@@ -1,6 +1,6 @@
-import client from "../database";
-import bcrypt from "bcryptjs";
-import dotenv from "dotenv";
+import client from '../database';
+import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
 dotenv.config();
 const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env;
 
@@ -14,7 +14,7 @@ export class UsersStore {
   async index() {
     try {
       const conn = await client.connect();
-      const sql = "SELECT * FROM users;";
+      const sql = 'SELECT * FROM users;';
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -26,7 +26,7 @@ export class UsersStore {
   async show(userId: string) {
     try {
       const conn = await client.connect();
-      const sql = "SELECT * FROM users WHERE id =$1;";
+      const sql = 'SELECT * FROM users WHERE id =$1;';
       const result = await conn.query(sql, [userId]);
       conn.release();
       return result.rows[0];
@@ -38,12 +38,13 @@ export class UsersStore {
   async create(user: User) {
     try {
       const conn = await client.connect();
-      const sql = "INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *";
+      const sql =
+        'INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *';
       const pepper = BCRYPT_PASSWORD;
       const saltRounds = SALT_ROUNDS as unknown as string;
       const hash = bcrypt.hashSync(
         user.password + pepper,
-        parseInt(saltRounds)
+        parseInt(saltRounds),
       );
       const result = await conn.query(sql, [
         user.firstname,

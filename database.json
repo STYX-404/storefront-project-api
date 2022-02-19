@@ -1,5 +1,6 @@
 {
   "defaultEnv": {"ENV": "NODE_ENV"},
+  
   "dev": {
     "database": {"ENV": "DB_NAME"},
     "user": {"ENV": "DB_USERNAME"},

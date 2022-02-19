@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import { Order, OrderStore } from "../models/order_model";
-import dotenv from "dotenv";
-import verifyAuthToken from "../middlewares/tokens_verify";
+import express, { Request, Response } from 'express';
+import { Order, OrderStore } from '../models/order_model';
+import dotenv from 'dotenv';
+import verifyAuthToken from '../middlewares/tokens_verify';
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ const show = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   const order: Order = {
     status: req.body.status,
-    userId: req.body.user_id,
+    user_id: req.body.user_id,
   };
   const newOrder = await store.create(order);
   res.json(newOrder);
@@ -35,19 +35,17 @@ const create = async (req: Request, res: Response) => {
 
 const addProduct = async (req: Request, res: Response) => {
   const orderId: string = req.params.id;
-  const productId: string = req.body.id;
-  const quantity: number = req.body.id;
+  const productId = req.body.productId;
+  const quantity = req.body.quantity;
   const addedProduct = await store.addProduct(orderId, productId, quantity);
   res.json(addedProduct);
 };
 
 const orders_routes = (app: express.Application) => {
-  app.get("/orders", index);
-  app.get("/orders/:id", show);
-  app.post("/orders", create);
-  app.post("/orders/:id/products", addProduct);
-  //   app.post("/orders", verifyAuthToken, create);
-  //   app.post("/orders/:id/products", verifyAuthToken, create);
+  app.get('/orders', verifyAuthToken, index);
+  app.get('/orders/:id', verifyAuthToken, show);
+  app.post('/orders', verifyAuthToken, create);
+  app.post('/orders/:id/products', verifyAuthToken, addProduct);
 };
 
 export default orders_routes;

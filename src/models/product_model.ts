@@ -1,4 +1,4 @@
-import client from "../database";
+import client from '../database';
 
 export type Product = {
   name: string;
@@ -9,7 +9,7 @@ export class ProductsStore {
   async index() {
     try {
       const conn = await client.connect();
-      const sql = "SELECT * FROM products;";
+      const sql = 'SELECT * FROM products;';
       const result = await conn.query(sql);
       conn.release();
       return result.rows;
@@ -21,7 +21,7 @@ export class ProductsStore {
   async show(productId: string) {
     try {
       const conn = await client.connect();
-      const sql = "SELECT * FROM products WHERE id =$1;";
+      const sql = 'SELECT * FROM products WHERE id =$1;';
       const result = await conn.query(sql, [productId]);
       conn.release();
       return result.rows[0];
@@ -32,7 +32,7 @@ export class ProductsStore {
   async create(product: Product) {
     try {
       const conn = await client.connect();
-      const sql = "INSERT INTO products (name, price) VALUES($1, $2) RETURNING *";
+      const sql = 'INSERT INTO products (name, price) VALUES($1, $2) RETURNING *';
       const result = await conn.query(sql, [product.name, product.price]);
       conn.release();
       return result.rows[0];

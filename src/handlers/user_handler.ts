@@ -1,8 +1,8 @@
-import express, { Request, Response, NextFunction } from "express";
-import { User, UsersStore } from "../models/user_model";
-import jwt, { Secret } from "jsonwebtoken";
-import dotenv from "dotenv";
-import verifyAuthToken from "../middlewares/tokens_verify";
+import express, { Request, Response } from 'express';
+import { User, UsersStore } from '../models/user_model';
+import jwt, { Secret } from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import verifyAuthToken from '../middlewares/tokens_verify';
 
 dotenv.config();
 
@@ -40,9 +40,9 @@ const create = async (req: Request, res: Response) => {
 };
 
 const user_routes = (app: express.Application) => {
-  app.get("/users", verifyAuthToken, index);
-  app.get("/users/:id", verifyAuthToken, show);
-  app.post("/users", verifyAuthToken, create);
+  app.get('/users', verifyAuthToken, index);
+  app.get('/users/:id', verifyAuthToken, show);
+  app.post('/users', create);
 };
 
 export default user_routes;

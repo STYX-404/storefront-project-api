@@ -1,6 +1,6 @@
-import express, { Request, Response } from "express";
-import { Product, ProductsStore } from "../models/product_model";
-import verifyAuthToken from "../middlewares/tokens_verify";
+import express, { Request, Response } from 'express';
+import { Product, ProductsStore } from '../models/product_model';
+import verifyAuthToken from '../middlewares/tokens_verify';
 
 const store = new ProductsStore();
 
@@ -25,9 +25,9 @@ const create = async (req: Request, res: Response) => {
 };
 
 const product_routes = (app: express.Application) => {
-  app.get("/products", index);
-  app.get("/products/:id", show);
-  app.post("/products", verifyAuthToken, create);
+  app.get('/products', index);
+  app.get('/products/:id', show);
+  app.post('/products', verifyAuthToken, create);
 };
 
 export default product_routes;
