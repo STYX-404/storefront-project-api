@@ -34,7 +34,7 @@ npm install
 cp .env.example .env
 ```
 
-Now, replace .env with your credentials and then run [.env file example](#env-file-example)
+Now, replace .env with your credentials and then run ( see [.env file example](#env-file-example) )
 
 ```
 npm run migrate:up
