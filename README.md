@@ -17,6 +17,7 @@ This is a storefront-api Project for FWD schoolership.
 Your machine must have the following installed on it:
 
 - [Node/NPM](https://nodejs.org/en/download/) (v16 or higher)
+- [PostgreSQL](https://www.postgresql.org/download) (14)
 
 ## 📝Instructions
 
@@ -29,16 +30,34 @@ npm install
 ```
 
 ### 2. 🛠️DB Creation and Migrations
-
+- Make an .env file from .env.example file
 ```
 cp .env.example .env
 ```
+ - Create super-user (owner) in Postgres
+```
+CREATE USER owner SUPERUSER WITH PASSWORD 'password123';
+```
+ - Create a DEV database (store)
+```
+CREATE DATABASE store
+```
+ - Create the TEST database (store-test)
+```
+CREATE DATABASE store-test
+```
+ - Grant all permissions to the super-user (owner) on the DEV and TEST database
+```
+GRANT ALL PRIVILEGES ON DATABASE store TO owner;
+GRANT ALL PRIVILEGES ON DATABASE store-test TO owner;
+```
 
-Now, replace .env with your credentials and then run ( see [.env file example](#env-file-example) )
+ - Now, replace .env with your credentials and then run ( see [.env file example](#env-file-example) )
 
 ```
 npm run migrate:up
 ```
+**_The default database PORT is 5432_**
 
 ### 3. 🟢Starting the project
 
@@ -70,11 +89,11 @@ SALT_ROUNDS=SALT_ROUNDS
 ```
 
 - `NODE_ENV` _is your default node environment (**dev** or **test** or **prod**)_
-- `DB_HOST` _is your database host_
-- `DB_NAME` _is your database name_
-- `DB_TEST_NAME` _is the name of your test database_
-- `DB_USERNAME` _is your database username_
-- `DB_PASSWORD` _is your database password_
+- `DB_HOST` _is your database host (The default is the localhost)_
+- `DB_NAME` _is your database name (should be **store**)_
+- `DB_TEST_NAME` _is the name of your test database (should be **store-test**)_
+- `DB_USERNAME` _is your database username (should be **owner**)_
+- `DB_PASSWORD` _is your database password (should be **password123**)_
 - `JWT_KEY` _is the secret you use for generating Authentication tokens_
 - `BCRYPT_PASSWORD` _is the salt you use for generating encrypted passwords_
 - `SALT_ROUNDS` _is the the number of encryption rounds_
